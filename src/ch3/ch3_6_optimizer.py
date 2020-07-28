@@ -87,4 +87,5 @@ if __name__ == '__main__':
     plt.plot(torch.linspace(0, 1, xAxis), losses_his[1], 'g-', lw=1, label="Momentum")
     plt.plot(torch.linspace(0, 1, xAxis), losses_his[2], 'b-', lw=1, label="RMSprop")
     plt.plot(torch.linspace(0, 1, xAxis), losses_his[3], 'y-', lw=1, label="Adam")
+    plt.legend(loc='best')
     plt.show()
