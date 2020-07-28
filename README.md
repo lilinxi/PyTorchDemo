@@ -9,3 +9,4 @@
 |import torch.nn.functional as F|激活函数|
 |torch.nn.|神经网络，损失函数，快速搭建|
 |torch.optim.|优化器|
+|import torch.utils.data as Data|批训练|
