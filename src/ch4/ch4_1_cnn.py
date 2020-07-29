@@ -4,7 +4,6 @@ import torch
 import torch.nn as nn
 import torch.utils.data as Data
 import torchvision  # 数据库模块
-import matplotlib.pyplot as plt
 
 torch.manual_seed(1)  # reproducible
 
@@ -59,8 +58,12 @@ class CNN(nn.Module):
         self.out = nn.Linear(32 * 7 * 7, 10)  # fully connected layer, output 10 classes
 
     def forward(self, x):
+        # torch.Size([50, 1, 28, 28]) -> torch.Size([50, 16, 14, 14]) -> torch.Size([50, 32, 7, 7])
         x = self.conv1(x)
         x = self.conv2(x)
+        # TODO Note：torch.Tensor.view = numpy.resize
+        # torch.Size([50, 32, 7, 7]) -> torch.Size([50, 1568])
+        # x.size(0) -> batch_size
         x = x.view(x.size(0), -1)  # 展平多维的卷积图成 (batch_size, 32 * 7 * 7)
         output = self.out(x)
         return output
@@ -93,7 +96,8 @@ loss_func = nn.CrossEntropyLoss()  # the target label is not one-hotted
 for epoch in range(EPOCH):
     print("Epoch:", epoch)
     for step, (b_x, b_y) in enumerate(train_loader):  # 分配 batch data, normalize x when iterate train_loader
-        print("step:", step)
+        if step % 100 == 0:
+            print("step:", step)
         output = cnn(b_x)  # cnn output
         loss = loss_func(output, b_y)  # cross entropy loss
         optimizer.zero_grad()  # clear gradients for this training step

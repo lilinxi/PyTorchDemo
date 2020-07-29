@@ -33,10 +33,10 @@ v_out.backward()  # 模拟 v_out 的误差反向传递
 # 针对于 v_out 的梯度就是, d(v_out)/d(variable) = 1/4*2*variable = variable/2
 
 print(variable.grad)  # 初始 Variable 的梯度
-'''
+"""
  0.5000  1.0000
  1.5000  2.0000
-'''
+"""
 
 print(variable)  # Variable 形式
 """
